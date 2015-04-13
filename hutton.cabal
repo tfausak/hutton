@@ -1,0 +1,34 @@
+name: hutton
+version: 0.0.0
+cabal-version: >=1.8
+build-type: Simple
+license: MIT
+license-file: LICENSE.md
+maintainer: Taylor Fausak <taylor@fausak.me>
+synopsis: A program for pressing the button.
+description:
+    Hutton is a program for pressing
+    <https://www.reddit.com/r/thebutton the button>.
+category: Utility
+extra-source-files:
+    CHANGELOG.md
+    README.md
+
+source-repository head
+    type: git
+    location: https://github.com/tfausak/hutton
+
+library
+    exposed-modules:
+        Hutton
+    build-depends:
+        base ==4.*
+    hs-source-dirs: library
+    ghc-options: -Wall
+
+executable hutton
+    main-is: Main.hs
+    build-depends:
+        base -any,
+        hutton -any
+    hs-source-dirs: executable
