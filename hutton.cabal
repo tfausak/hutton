@@ -21,8 +21,16 @@ source-repository head
 library
     exposed-modules:
         Hutton
+        Hutton.WebSockets
     build-depends:
-        base ==4.*
+        base ==4.*,
+        bytestring ==0.10.*,
+        connection ==0.2.*,
+        flow ==1.*,
+        http-types ==0.8.*,
+        network ==2.*,
+        text ==1.*,
+        websockets ==0.9.*
     hs-source-dirs: library
     ghc-options: -Wall
 
