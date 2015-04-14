@@ -21,8 +21,10 @@ source-repository head
 library
     exposed-modules:
         Hutton
+        Hutton.JSON
         Hutton.WebSockets
     build-depends:
+        aeson ==0.8.*,
         base ==4.*,
         bytestring ==0.10.*,
         connection ==0.2.*,

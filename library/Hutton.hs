@@ -2,13 +2,14 @@
 
 module Hutton where
 
+import Hutton.JSON (Message)
 import Hutton.WebSockets (runSecureClient)
 
 import Control.Monad (forever, void)
+import Data.Aeson (eitherDecode)
 import Data.ByteString.Builder (toLazyByteString)
 import Data.ByteString.Char8 (pack)
 import Data.ByteString.Lazy.Char8 (unpack)
-import Data.Text (Text)
 import Flow
 import Network.HTTP.Types (encodePath)
 import Network.Socket (PortNumber)
@@ -22,8 +23,9 @@ main = do
 
 application :: ClientApp ()
 application connection = forever .> void <| do
-    message <- receiveData connection
-    print (message :: Text)
+    json <- receiveData connection
+    let message = eitherDecode json
+    print (message :: Either String Message)
 
 host :: String
 host = "wss.redditmedia.com"
