@@ -21,7 +21,10 @@ import System.Environment (getArgs)
 
 main :: IO ()
 main = do
-    [h, e] <- getArgs
+    args <- getArgs
+    let (h, e) = case args of
+            [x, y] -> (x, y)
+            _ -> ("1bfe495776935f5aaaa949c6152772a2d37525e3", "1429071395")
     runSecureClient host port (path h e) application
 
 application :: ClientApp ()
