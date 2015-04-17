@@ -23,7 +23,6 @@ library
         Hutton
         Hutton.HTTP
         Hutton.JSON
-        Hutton.WebSockets
     build-depends:
         aeson ==0.8.*,
         base ==4.*,
@@ -36,7 +35,8 @@ library
         rainbow ==0.22.*,
         regex-compat ==0.95.*,
         text ==1.*,
-        websockets ==0.9.*
+        websockets ==0.9.*,
+        wuss ==1.*
     hs-source-dirs: library
     ghc-options: -Wall
 

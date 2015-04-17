@@ -4,7 +4,6 @@ module Hutton where
 
 import Hutton.HTTP (getParameters)
 import Hutton.JSON (Message (..), Payload (..))
-import Hutton.WebSockets (runSecureClient)
 
 import Control.Monad (forever, void)
 import Data.Aeson (eitherDecode)
@@ -18,6 +17,7 @@ import Network.Socket (PortNumber)
 import Network.WebSockets (ClientApp, receiveData)
 import Rainbow (Chunk, Radiant, blue, cyan, fore, green, magenta, putChunkLn,
     red, yellow, (<>))
+import Wuss (runSecureClient)
 
 main :: IO ()
 main = do
