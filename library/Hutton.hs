@@ -2,6 +2,7 @@
 
 module Hutton where
 
+import Hutton.HTTP (getParameters)
 import Hutton.JSON (Message (..), Payload (..))
 import Hutton.WebSockets (runSecureClient)
 
@@ -17,15 +18,16 @@ import Network.Socket (PortNumber)
 import Network.WebSockets (ClientApp, receiveData)
 import Rainbow (Chunk, Radiant, blue, cyan, fore, green, magenta, putChunkLn,
     red, yellow, (<>))
-import System.Environment (getArgs)
 
 main :: IO ()
 main = do
-    args <- getArgs
-    let (h, e) = case args of
-            [x, y] -> (x, y)
-            _ -> ("1bfe495776935f5aaaa949c6152772a2d37525e3", "1429071395")
-    runSecureClient host port (path h e) application
+    putStrLn "Getting query parameters..."
+    parameters <- getParameters
+    case parameters of
+        Just (h, e) -> do
+            putStrLn "Establishing a WebSocket connection..."
+            runSecureClient host port (path h e) application
+        Nothing -> putStrLn "Failed to get parameters :("
 
 application :: ClientApp ()
 application connection = forever .> void <| do
