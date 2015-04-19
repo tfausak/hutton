@@ -22,19 +22,19 @@ executable hutton
     main-is: Main.hs
     build-depends:
         aeson ==0.8.*,
-        base ==4.*,
+        base >=4.7 && <4.9,
         bytestring ==0.10.*,
         connection ==0.2.*,
-        flow ==1.*,
+        flow ==1.0.*,
         http-client ==0.4.*,
-        http-conduit ==2.*,
+        http-conduit ==2.1.*,
         http-types ==0.8.*,
-        network ==2.*,
+        network ==2.6.*,
         rainbow ==0.22.*,
         regex-compat ==0.95.*,
-        text ==1.*,
-        time ==1.*,
-        transformers ==0.4.*,
+        text ==1.2.*,
+        time ==1.5.*,
+        transformers >=0.3 && <0.5,
         websockets ==0.9.*,
-        wuss ==1.*
+        wuss ==1.0.*
     ghc-options: -Wall

@@ -2,6 +2,7 @@
 
 module Main where
 
+import Control.Applicative ((<$>), (<*>))
 import Control.Monad (forever, mzero, when)
 import Control.Monad.IO.Class (MonadIO, liftIO)
 import Data.Aeson (FromJSON, Value (Object), eitherDecode, parseJSON, (.:))
@@ -14,22 +15,26 @@ import Data.Time.Clock (UTCTime)
 import Data.Time.Format (defaultTimeLocale, parseTimeOrError)
 import Flow ((|>), (<|))
 import Network.HTTP.Client (Manager, Request)
-import Network.HTTP.Conduit (httpLbs, parseUrl, responseBody, simpleHttp, urlEncodedBody,
-    withManager)
+import Network.HTTP.Conduit (httpLbs, parseUrl, responseBody, simpleHttp,
+    urlEncodedBody, withManager)
 import Network.WebSockets (Connection, receiveData)
 import Rainbow (Chunk, Radiant, blue, cyan, fore, green, magenta, putChunk,
     red, yellow, (<>))
 import System.Environment (getArgs)
-import System.Exit (die)
+import System.Exit (exitFailure, exitSuccess)
 import Text.Regex (matchRegex, mkRegex)
 import Wuss (runSecureClient)
+
+import Prelude
 
 main :: IO ()
 main = do
     args <- getArgs
     case args of
         [threshold', username, password] -> main1 threshold' username password
-        _ -> die "Usage: hutton THRESHOLD USERNAME PASSWORD"
+        _ -> do
+            putStrLn "Usage: hutton THRESHOLD USERNAME PASSWORD"
+            exitFailure
 
 main1 :: String -> String -> String -> IO ()
 main1 threshold' username password = do
@@ -50,7 +55,9 @@ main2 threshold loginRequest manager = do
     loginResponse <- httpLbs loginRequest manager
     liftIO <| case eitherDecode (responseBody loginResponse) of
         Right login -> main3 threshold login manager
-        Left message -> die message
+        Left message -> do
+            putStrLn message
+            exitFailure
 
 main3 :: Int -> LoginResponse -> Manager -> IO ()
 main3 threshold login manager = do
@@ -63,7 +70,9 @@ main3 threshold login manager = do
         haystack = unpack buttonResponse
     case matchRegex needle haystack of
         Just [h, e] -> main4 h e threshold login manager
-        _ -> die "Failed to get query parameters."
+        _ -> do
+            putStrLn "Failed to get query parameters."
+            exitFailure
 
 main4 :: String -> String -> Int -> LoginResponse -> Manager -> IO ()
 main4 h e threshold login manager = do
@@ -119,7 +128,8 @@ main9 datum login manager = do
         pressRequest = urlEncodedBody pressQuery initialPressRequest
     pressResponse <- httpLbs pressRequest manager
     print pressResponse
-    die "Pressed the button."
+    putStrLn "Pressed the button."
+    exitSuccess
 
 data LoginResponse = LoginResponse
     { login_json :: LoginJson
