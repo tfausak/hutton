@@ -2,7 +2,6 @@
 
 module Main where
 
-import Control.Applicative ((<$>), (<*>))
 import Control.Monad (forever, mzero, when)
 import Control.Monad.IO.Class (MonadIO, liftIO)
 import Data.Aeson (FromJSON, Value (Object), eitherDecode, parseJSON, (.:))
@@ -16,7 +15,7 @@ import Data.Time.Format (defaultTimeLocale, parseTimeOrError)
 import Flow ((|>), (<|))
 import Network.HTTP.Client (Manager, Request)
 import Network.HTTP.Conduit (httpLbs, parseUrl, requestHeaders, responseBody,
-    simpleHttp, urlEncodedBody, withManager)
+    simpleHttp, urlEncodedBody, newManager, tlsManagerSettings)
 import Network.WebSockets (Connection, receiveData)
 import Rainbow (Chunk, Radiant, blue, cyan, fore, green, magenta, putChunk,
     red, yellow, (<>))
@@ -50,7 +49,8 @@ main1 threshold' username password = do
             , ("passwd", fromString password)
             ]
         loginRequest = urlEncodedBody loginQuery initialLoginRequest
-    withManager (main2 threshold loginRequest)
+    manager <- newManager tlsManagerSettings
+    main2 threshold loginRequest manager
 
 -- Actually log in.
 main2 :: (MonadIO m) => Int -> Request -> Manager -> m ()

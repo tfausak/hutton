@@ -1,0 +1,36 @@
+category: Utility
+description: Hutton is a program for the button on Reddit.
+executables:
+  hutton:
+    dependencies:
+    - aeson >=0.8 && <0.12
+    - base >=4.7 && <4.9
+    - bytestring ==0.10.*
+    - connection ==0.2.*
+    - flow ==1.0.*
+    - http-client ==0.4.*
+    - http-conduit ==2.1.*
+    - http-types >=0.8 && <0.10
+    - network ==2.6.*
+    - rainbow ==0.22.*
+    - regex-compat ==0.95.*
+    - text ==1.2.*
+    - time ==1.5.*
+    - transformers >=0.3 && <0.5
+    - websockets ==0.9.*
+    - wuss ==1.0.*
+    main: Main.hs
+extra-source-files:
+- CHANGELOG.md
+- LICENSE.md
+- package.yaml
+- README.md
+- stack.yaml
+ghc-options:
+- -Wall
+github: tfausak/hutton
+license: MIT
+maintainer: Taylor Fausak
+name: hutton
+synopsis: Automatically re-export modules.
+version: '1.0.0'

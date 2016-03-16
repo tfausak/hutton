@@ -1,0 +1,6 @@
+extra-deps:
+- rainbow-0.22.0.2
+- wuss-1.0.2
+install-ghc: true
+require-stack-version: ! '>=1.0.4'
+resolver: lts-5.8

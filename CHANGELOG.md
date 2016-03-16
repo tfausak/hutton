@@ -1,9 +1,7 @@
 # Change log
 
-## v1.0.0 (2015-04-19)
+Hutton uses [Semantic Versioning][].
+The change log is available through the [releases on GitHub][].
 
--   Initially released.
-
-## v0.0.0 (2015-04-13)
-
--   Initially created.
+[Semantic Versioning]: http://semver.org/spec/v2.0.0.html
+[releases on GitHub]: https://github.com/tfausak/hutton/releases

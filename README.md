@@ -1,5 +1,8 @@
 # [Hutton][]
 
+[![Version badge][]][version]
+[![Build badge]][build]
+
 A Haskell program for [the button][] on Reddit.
 
 Use `hutton` to automatically press the button whenever you want. In the mean
@@ -41,5 +44,9 @@ Connected to WebSocket.
 #   4. MAC
 ```
 
-[hutton]: https://github.com/tfausak/hutton
+[Hutton]: https://github.com/tfausak/hutton
+[Version badge]: https://img.shields.io/hackage/v/hutton.svg?label=version
+[version]: https://hackage.haskell.org/package/hutton
+[Build badge]: https://travis-ci.org/tfausak/hutton.svg?branch=master
+[build]: https://travis-ci.org/tfausak/hutton
 [the button]: https://www.reddit.com/r/thebutton
